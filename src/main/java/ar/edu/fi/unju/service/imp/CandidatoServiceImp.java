@@ -56,5 +56,25 @@ public class CandidatoServiceImp implements ICandidatoService {
 		Optional <Candidato> candidato = listaCandidato.getCandidatos().stream().filter(a -> a.getCodigo() == codigo).findFirst();
 		return candidato.get();
 	}
-
+	
+	@Override
+	public void obtenerPorcentaje() {
+		
+		int totalVotos = 0;
+		for (Candidato candi : listaCandidato.getCandidatos()) {
+			totalVotos = candi.getCantidadVotos()+totalVotos;
+		}
+		
+		listaCandidato.setTotalVotos(totalVotos);
+		
+		if(totalVotos>0) {
+			for (Candidato candi : listaCandidato.getCandidatos()) {
+				candi.setPorcentaje((candi.getCantidadVotos()*100)/listaCandidato.getTotalVotos());
+			}
+		}else {
+			for (Candidato candi : listaCandidato.getCandidatos()) {
+				candi.setPorcentaje(100);
+			}
+		}
+	}
 }

@@ -9,6 +9,8 @@
 	<body>
 		<header th:replace="layouts/header::header"> </header>	
 		<br>
+		<h1 class="text-center">Editar Candidato</h1>
+		<br>
 		<div class="container">
 			<form th:action="@{/candidato/modificar}" method="post" th:object="${aliasCandidato}">
 				<div class="mb-3">
@@ -39,10 +41,11 @@
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 				  	<button type="submit" class="btn btn-dark">Enviar</button>	
-				  	<a th:href="@{/candidato/cargar}" class="btn btn-secondary">Cancelar</a>
+				  	<a th:href="@{/candidato/listacandidatos}" class="btn btn-outline-secondary">Cancelar</a>
 				</div>
 			</form>
 		</div>
+		
 		<footer th:replace="layouts/footer::footer"></footer>
 	</body>
 </html>

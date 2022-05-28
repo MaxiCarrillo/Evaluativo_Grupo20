@@ -54,7 +54,9 @@ public class CandidatoController {
 	
 	@GetMapping("/listacandidatos")
 	public String mostrarCandidatos(Model model) {
+		candidatoService.obtenerPorcentaje();
 		model.addAttribute("candidatos", candidatoService.getListaCandidato().getCandidatos());
+		model.addAttribute("votos", candidatoService.getListaCandidato().getTotalVotos());
 		return "lista_candidatos";
 	}
 	

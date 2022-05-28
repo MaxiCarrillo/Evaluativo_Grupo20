@@ -1,5 +1,6 @@
 package ar.edu.fi.unju.model;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Candidato {
 
-	@NotNull
+	@NotNull @Min(value=1,message="El codigo ser mayor que o igual a 1")
 	private int codigo;
 	@NotEmpty(message="El nombre no puede estar vacio")
 	private String nombre;
@@ -16,6 +17,7 @@ public class Candidato {
 	@NotEmpty(message="La descripcion no puede estar vacia")
 	private String descripcion;
 	private int cantidadVotos;
+	private int porcentaje;
 	
 	public Candidato() {
 		// TODO Auto-generated constructor stub
@@ -61,17 +63,24 @@ public class Candidato {
 		this.cantidadVotos = cantidadVotos;
 	}
 
+	public int getPorcentaje() {
+		return porcentaje;
+	}
+
+	public void setPorcentaje(int porcentaje) {
+		this.porcentaje = porcentaje;
+	}
+
 	public Candidato(@NotNull int codigo, @NotEmpty(message = "El nombre no puede estar vacio") String nombre,
 			String generoMusical, @NotEmpty(message = "La descripcion no puede estar vacia") String descripcion,
-			int cantidadVotos) {
+			int cantidadVotos, int porcentaje) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.generoMusical = generoMusical;
 		this.descripcion = descripcion;
 		this.cantidadVotos = cantidadVotos;
+		this.porcentaje = porcentaje;
 	}
-	
-	
 	
 }
