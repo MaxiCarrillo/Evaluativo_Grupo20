@@ -77,4 +77,14 @@ public class CandidatoServiceImp implements ICandidatoService {
 			}
 		}
 	}
+	
+	public boolean existeCandidato(Candidato candidato) {
+		boolean resultado=false;
+		for (Candidato can : listaCandidato.getCandidatos()) {
+			if(can.getCodigo()==candidato.getCodigo()) {
+				resultado=true;
+			}
+		}
+		return resultado;
+	}
 }

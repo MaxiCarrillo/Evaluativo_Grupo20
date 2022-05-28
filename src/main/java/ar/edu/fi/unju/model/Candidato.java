@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Candidato {
-
-	@NotNull @Min(value=1,message="El codigo ser mayor que o igual a 1")
+	
+	@NotNull
+	@Min(value=1,message="El codigo ya existe")
 	private int codigo;
 	@NotEmpty(message="El nombre no puede estar vacio")
 	private String nombre;

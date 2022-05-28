@@ -16,7 +16,7 @@
 				<div class="mb-3">
 				  	<label for="idCodigo" class="form-label">Codigo</label>
 					<input type="number" class="form-control" id="idCodigo" th:field=*{codigo}>
-					<div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+					<div class="text-danger" th:if="${banderaCodigo}" th:text="'Codigo ya ingresado'"></div>
 				</div>
 				<div class="mb-2">
 				  	<label for="idNombre" class="form-label">Nombre</label>

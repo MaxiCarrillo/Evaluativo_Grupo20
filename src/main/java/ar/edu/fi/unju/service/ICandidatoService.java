@@ -12,5 +12,5 @@ public interface ICandidatoService {
 	public void eliminarCandidato(int codigo);
 	public Candidato buscarCanditato(int codigo);
 	public void obtenerPorcentaje();
-	
+	public boolean existeCandidato(Candidato candidato);
 }

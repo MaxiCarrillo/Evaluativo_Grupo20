@@ -36,9 +36,10 @@ public class CandidatoController {
 	
 	@PostMapping("")
 	public ModelAndView agregarCandidato(@Validated @ModelAttribute("aliasCandidato") Candidato candidato, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
+		if(bindingResult.hasErrors() || candidatoService.existeCandidato(candidato)) {
 			ModelAndView modeloVista = new ModelAndView("cargar_candidato");
 			modeloVista.addObject("aliasCandidato", candidato);
+			modeloVista.addObject("banderaCodigo", candidatoService.existeCandidato(candidato));
 			return modeloVista;
 		}
 		
