@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,6 +56,37 @@ public class CandidatoController {
 	public String mostrarCandidatos(Model model) {
 		model.addAttribute("candidatos", candidatoService.getListaCandidato().getCandidatos());
 		return "lista_candidatos";
+	}
+	
+	
+	@GetMapping("/editar/{codigo}")
+	public ModelAndView editarCandidato(@PathVariable("codigo") int codigo){
+		ModelAndView modeloVista = new ModelAndView("editar_candidato");
+		Candidato candidato = candidatoService.buscarCanditato(codigo);
+		modeloVista.addObject("aliasCandidato", candidato);
+		return modeloVista;
+	}
+	
+	@PostMapping("/modificar")
+	public ModelAndView modificarCandidato(@Validated @ModelAttribute("aliasCandidato") Candidato candidato, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			ModelAndView modeloVista = new ModelAndView("editar_candidato");
+			modeloVista.addObject("aliasCandidato", candidato);
+			return modeloVista;
+		}
+		
+		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
+		candidatoService.modificarCandidato(candidato);
+		
+		return modeloVista;
+	}
+	
+	
+	@GetMapping("/eliminar/{codigo}")
+	public ModelAndView eliminarCandidato(@PathVariable("codigo") int codigo) {
+		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
+		candidatoService.eliminarCandidato(codigo);
+		return modeloVista;
 	}
 	
 }
