@@ -2,10 +2,25 @@ package ar.edu.fi.unju.model;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Usuario {
 	
+	int codigo;
+	@NotEmpty(message="El nombre no puede estar vacio")
 	private String nombre;
+	@NotEmpty @Email
 	private String mail;
+	@Past
+	@NotNull(message="La fecha no puede ser nula")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate nacimiento;
 	private int edad;
 	private int cantidadVotos;
@@ -53,6 +68,13 @@ public class Usuario {
 	public void setCantidadVotos(int cantidadVotos) {
 		this.cantidadVotos = cantidadVotos;
 	}
-	
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 	
 }

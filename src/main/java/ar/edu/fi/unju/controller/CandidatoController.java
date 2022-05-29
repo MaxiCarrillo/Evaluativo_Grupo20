@@ -64,10 +64,17 @@ public class CandidatoController {
 	
 	@GetMapping("/editar/{codigo}")
 	public ModelAndView editarCandidato(@PathVariable("codigo") int codigo){
-		ModelAndView modeloVista = new ModelAndView("editar_candidato");
-		Candidato candidato = candidatoService.buscarCanditato(codigo);
-		modeloVista.addObject("aliasCandidato", candidato);
+		
+		if(codigo!=0) {
+			ModelAndView modeloVista = new ModelAndView("editar_candidato");
+			Candidato candidato = candidatoService.buscarCanditato(codigo);
+			modeloVista.addObject("aliasCandidato", candidato);
+			return modeloVista;
+		}
+		
+		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
 		return modeloVista;
+		
 	}
 	
 	@PostMapping("/modificar")
@@ -79,7 +86,10 @@ public class CandidatoController {
 		}
 		
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
-		candidatoService.modificarCandidato(candidato);
+		if(candidato.getCodigo()!=0) {
+			candidatoService.modificarCandidato(candidato);
+		}
+		
 		
 		return modeloVista;
 	}
@@ -88,7 +98,9 @@ public class CandidatoController {
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView eliminarCandidato(@PathVariable("codigo") int codigo) {
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
-		candidatoService.eliminarCandidato(codigo);
+		if(codigo!=0) {
+			candidatoService.eliminarCandidato(codigo);
+		}
 		return modeloVista;
 	}
 	
