@@ -2,6 +2,7 @@ package ar.edu.fi.unju.service.imp;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,11 @@ public class UsuarioServiceImp implements IUsuarioService {
 			años=Period.between(user.getNacimiento(), LocalDate.now());
 			user.setEdad(años.getYears());
 		}
+	}
+	
+	public void sumarVoto(int codigo) {
+		Optional <Usuario> usuario = listaUsuario.getUsuarios().stream().filter(a -> a.getCodigo()==codigo).findFirst();
+		usuario.get().setCantidadVotos(usuario.get().getCantidadVotos()+1);
 	}
 
 }

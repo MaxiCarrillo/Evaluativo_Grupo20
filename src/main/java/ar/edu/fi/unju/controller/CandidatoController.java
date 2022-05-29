@@ -58,6 +58,7 @@ public class CandidatoController {
 		candidatoService.obtenerPorcentaje();
 		model.addAttribute("candidatos", candidatoService.getListaCandidato().getCandidatos());
 		model.addAttribute("votos", candidatoService.getListaCandidato().getTotalVotos());
+		LOGGER.info("Se muestra la lista de candidatos");
 		return "lista_candidatos";
 	}
 	
@@ -88,6 +89,7 @@ public class CandidatoController {
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
 		if(candidato.getCodigo()!=0) {
 			candidatoService.modificarCandidato(candidato);
+			LOGGER.info("Se modifico el candidato con el ID/Codigo: "+candidato.getCodigo());
 		}
 		
 		
@@ -100,6 +102,7 @@ public class CandidatoController {
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
 		if(codigo!=0) {
 			candidatoService.eliminarCandidato(codigo);
+			LOGGER.info("Se elimino el candidato con el ID/Codigo: "+codigo);
 		}
 		return modeloVista;
 	}

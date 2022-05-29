@@ -9,5 +9,6 @@ public interface IUsuarioService {
 	public ListaUsuario getListaUsuario();
 	public boolean guardarUsuario(Usuario usuario);
 	public void calcularEdad();
+	public void sumarVoto(int codigo);
 	
 }

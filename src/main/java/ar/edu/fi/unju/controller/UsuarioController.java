@@ -53,6 +53,7 @@ public class UsuarioController {
 	public String mostrarUsuarios(Model model) {
 		usuarioService.calcularEdad();
 		model.addAttribute("usuarios", usuarioService.getListaUsuario().getUsuarios());
+		LOGGER.info("Se lista los usuarios");
 		return "lista_usuarios";
 	}
 	
