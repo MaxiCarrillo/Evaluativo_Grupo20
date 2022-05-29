@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Candidato</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<header th:replace="layouts/header::header"> </header>	
+		<br>
+		<h1 class="text-center">Cargar Usuario</h1>
+		<br>
+		<div class="container">
+			<form th:action="@{/usuario}" method="post" th:object="${aliasUsuario}">
+				<div class="mb-2">
+				  	<label for="idNombre" class="form-label">Nombre</label>
+					<input type="text" class="form-control" id="idNombre" th:field=*{nombre}>
+					<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+				</div>
+				<div class="mb-2">
+				  	<label for="idCorreo" class="form-label">Correo Electronico</label>
+					<input type="text" class="form-control" id="idCorreo" th:field=*{mail}>
+					<div class="text-danger" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
+				</div>
+				<div class="mb-2">
+				  	<label for="idNacimiento" class="form-label">Fecha de Nacimiento</label>
+					<input type="date" class="form-control" id="Nacimiento" th:field=*{nacimiento}>
+					<div class="text-danger" th:if="${#fields.hasErrors('nacimiento')}" th:errors="*{nacimiento}"></div>
+				</div>
+				<br>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				  	<button type="submit" class="btn btn-dark">Enviar</button>	
+				  	<a th:href="@{/usuario/cargar}" class="btn btn-secondary">Cancelar</a>
+				  	<a th:href="@{/usuario/listausuarios}" class="btn btn-outline-secondary">Ver Candidatos</a>
+				</div>
+			</form>
+		</div>
+		<footer th:replace="layouts/footer::footer"></footer>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Usuarios</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<header th:replace="layouts/header::header"> </header>
+		<br>
+		<h1 class="text-center">Lista Total de Usuarios</h1>
+		<br>
+		<div class="container text-center">
+			<table class="table table-striped table-hover">
+					<thead>
+					    <tr>
+					      <th scope="col">ID</th>
+					      <th scope="col">Nombre</th>
+					      <th scope="col">Correo Electronico</th>
+					      <th scope="col">Fecha de Nacimiento</th>
+					      <th scope="col">Edad</th>
+					    </tr>
+					</thead>
+					<tbody>
+					    <tr th:each="usuario: ${usuarios}">
+					    	<th scope="row" th:text="${usuario.codigo}"></th>
+					      <td th:text="${usuario.nombre}"></td>
+					      <td th:text="${usuario.mail}"></td>
+					      <td th:text="${usuario.nacimiento}"></td>
+					      <td th:text="${usuario.edad}+' años'"></td>
+					    </tr>
+					</tbody>
+			</table>
+		</div>
+		<footer th:replace="layouts/footer::footer"></footer>
+	</body>
+</html>

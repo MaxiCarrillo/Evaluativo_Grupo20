@@ -58,16 +58,24 @@ public class CandidatoController {
 		candidatoService.obtenerPorcentaje();
 		model.addAttribute("candidatos", candidatoService.getListaCandidato().getCandidatos());
 		model.addAttribute("votos", candidatoService.getListaCandidato().getTotalVotos());
+		LOGGER.info("Se muestra la lista de candidatos");
 		return "lista_candidatos";
 	}
 	
 	
 	@GetMapping("/editar/{codigo}")
 	public ModelAndView editarCandidato(@PathVariable("codigo") int codigo){
-		ModelAndView modeloVista = new ModelAndView("editar_candidato");
-		Candidato candidato = candidatoService.buscarCanditato(codigo);
-		modeloVista.addObject("aliasCandidato", candidato);
+		
+		if(codigo!=0) {
+			ModelAndView modeloVista = new ModelAndView("editar_candidato");
+			Candidato candidato = candidatoService.buscarCanditato(codigo);
+			modeloVista.addObject("aliasCandidato", candidato);
+			return modeloVista;
+		}
+		
+		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
 		return modeloVista;
+		
 	}
 	
 	@PostMapping("/modificar")
@@ -79,7 +87,11 @@ public class CandidatoController {
 		}
 		
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
-		candidatoService.modificarCandidato(candidato);
+		if(candidato.getCodigo()!=0) {
+			candidatoService.modificarCandidato(candidato);
+			LOGGER.info("Se modifico el candidato con el ID/Codigo: "+candidato.getCodigo());
+		}
+		
 		
 		return modeloVista;
 	}
@@ -88,7 +100,10 @@ public class CandidatoController {
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView eliminarCandidato(@PathVariable("codigo") int codigo) {
 		ModelAndView modeloVista = new ModelAndView("redirect:/candidato/listacandidatos");
-		candidatoService.eliminarCandidato(codigo);
+		if(codigo!=0) {
+			candidatoService.eliminarCandidato(codigo);
+			LOGGER.info("Se elimino el candidato con el ID/Codigo: "+codigo);
+		}
 		return modeloVista;
 	}
 	

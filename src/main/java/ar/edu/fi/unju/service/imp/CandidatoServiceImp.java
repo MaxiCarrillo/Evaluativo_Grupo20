@@ -87,4 +87,9 @@ public class CandidatoServiceImp implements ICandidatoService {
 		}
 		return resultado;
 	}
+	
+	public void sumarVoto(int codigo) {
+		Optional <Candidato> candidato = listaCandidato.getCandidatos().stream().filter(a -> a.getCodigo() == codigo).findFirst();
+		candidato.get().setCantidadVotos(candidato.get().getCantidadVotos()+1);
+	}
 }

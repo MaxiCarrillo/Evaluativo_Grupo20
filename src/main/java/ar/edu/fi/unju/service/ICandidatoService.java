@@ -13,4 +13,5 @@ public interface ICandidatoService {
 	public Candidato buscarCanditato(int codigo);
 	public void obtenerPorcentaje();
 	public boolean existeCandidato(Candidato candidato);
+	public void sumarVoto(int codigo);
 }
